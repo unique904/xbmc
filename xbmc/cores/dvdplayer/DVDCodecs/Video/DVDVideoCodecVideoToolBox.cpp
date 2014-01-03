@@ -1533,7 +1533,7 @@ CDVDVideoCodecVideoToolBox::CreateVTSession(int width, int height, CMFormatDescr
       // the bandwidth requirements.
       int width_clamp = 1280;
       if ((width * height) > (1920 * 800))
-        width_clamp = 960;
+        width_clamp = 1024;
 
       int new_width = CheckNP2(width);
       if (width != new_width)
