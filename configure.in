@@ -768,7 +768,7 @@ fi
 final_message="$final_message\n  git Rev.:\t${GIT_REV}"
 
 if test "$host_vendor" = "apple"; then
-  echo "#define GIT_REV \"$GIT_REV\"" > git_revision.h
+  echo "#define GIT_REV \"alpha-linusyang\"" > git_revision.h
 else
   SDL_DEFINES="$SDL_DEFINES -D'GIT_REV=\"$GIT_REV\"'"
 fi
