@@ -63,6 +63,13 @@ static CGUITextLayout* GetFontLayout()
                                                     , CSettings::Get().GetInt("subtitles.height")
                                                     , CSettings::Get().GetInt("subtitles.style")
                                                     , false, 1.0f, 1.0f, &pal, true);
+    // Disable font border loading for laggy subtitles on darwin platforms
+#if defined(TARGET_DARWIN_IOS)
+    if (!subtitle_font)
+      CLog::Log(LOGERROR, "CGUIWindowFullScreen::OnMessage(WINDOW_INIT) - Unable to load subtitle font");
+    else
+      return new CGUITextLayout(subtitle_font, true, 0, NULL);
+#else
     CGUIFont *border_font   = g_fontManager.LoadTTF("__subtitleborder__"
                                                     , font_path
                                                     , 0xFF000000
@@ -74,6 +81,7 @@ static CGUITextLayout* GetFontLayout()
       CLog::Log(LOGERROR, "CGUIWindowFullScreen::OnMessage(WINDOW_INIT) - Unable to load subtitle font");
     else
       return new CGUITextLayout(subtitle_font, true, 0, border_font);
+#endif
   }
 
   return NULL;
